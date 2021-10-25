@@ -19,11 +19,19 @@ public class InvoiceService {
         return totalFare;
     }
 
-    public double calculateFare(Ride[] rides) {
+    public double calculateTotalFare(Ride[] rides) {
         double totalFare = 0.0;
         for (Ride ride : rides) {
             totalFare = calculateFare(ride.getDistance(), ride.getTime());
         }
         return totalFare;
+
+    }
+    public InvoiceSummary calculateFare(Ride[] rides) {
+        double totalFare = 0.0;
+        for (Ride ride : rides) {
+            totalFare += calculateFare(ride.getDistance(), ride.getTime());
+        }
+        return new InvoiceSummary(rides.length, totalFare);
     }
 }
